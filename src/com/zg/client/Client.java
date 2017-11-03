@@ -1,4 +1,4 @@
-﻿package com.zg.client;
+package com.zg.client;
 
 import com.zg.bean.User;
 
@@ -46,59 +46,59 @@ public class Client {
         init();
         //写消息的文本框中按回车键时事件
         textField.addActionListener((ActionEvent e) ->{
-                send(); //执行发送
+            send(); //执行发送
         });
         //单击发送按钮时事件
         btn_send.addActionListener((ActionEvent e) -> {
-                send(); //执行发送
+            send(); //执行发送
         });
         //单击连接按钮时事件
         btn_start.addActionListener((ActionEvent e) -> {
-                int port;
-                if (isConnected) {
-                    JOptionPane.showMessageDialog(frame, "已处于连接上状态， 不要重复连接！", "错误", JOptionPane.ERROR_MESSAGE);
-                    return ;
-                }
+            int port;
+            if (isConnected) {
+                JOptionPane.showMessageDialog(frame, "已处于连接上状态， 不要重复连接！", "错误", JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+            try {
                 try {
-                    try {
-                        port = Integer.parseInt(txt_port.getText().trim());
-                    } catch (NumberFormatException e2) {
-                        throw new Exception("端口号不符合要求！端口为整数！");
-                    }
-                    String hostIp = txt_hostIp.getText().trim();
-                    String name = txt_name.getText().trim();
-                    if (name.equals("") || hostIp.equals("")) {
-                        throw new Exception("姓名、服务器IP不能为空!");
-                    }
-                    boolean flag = connectServer(port, hostIp, name);
-                    if (!flag) {
-                        throw new Exception("与服务器连接失败!");
-                    }
-                    frame.setTitle(name);
-                    JOptionPane.showMessageDialog(frame, "成功连接！");
-                }catch (Exception exc) {
-                    JOptionPane.showMessageDialog(frame, exc.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+                    port = Integer.parseInt(txt_port.getText().trim());
+                } catch (NumberFormatException e2) {
+                    throw new Exception("端口号不符合要求！端口为整数！");
                 }
-                btn_start.setEnabled(false);
-                btn_stop.setEnabled(true);
+                String hostIp = txt_hostIp.getText().trim();
+                String name = txt_name.getText().trim();
+                if (name.equals("") || hostIp.equals("")) {
+                    throw new Exception("姓名、服务器IP不能为空!");
+                }
+                boolean flag = connectServer(port, hostIp, name);
+                if (!flag) {
+                    throw new Exception("与服务器连接失败!");
+                }
+                frame.setTitle(name);
+                JOptionPane.showMessageDialog(frame, "成功连接！");
+            }catch (Exception exc) {
+                JOptionPane.showMessageDialog(frame, exc.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+            }
+            btn_start.setEnabled(false);
+            btn_stop.setEnabled(true);
         });
         //单击断开按钮时事件
         btn_stop.addActionListener((ActionEvent e) -> {
-                if (!isConnected) {
-                    JOptionPane.showMessageDialog(frame, "已处于断开状态，不要重复断开！", "错误", JOptionPane.ERROR_MESSAGE);
-                    return ;
+            if (!isConnected) {
+                JOptionPane.showMessageDialog(frame, "已处于断开状态，不要重复断开！", "错误", JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+            try {
+                boolean flag = closeConnection(); //断开连接
+                if (!flag) {
+                    throw new Exception("断开连接发生异常！");
                 }
-                try {
-                    boolean flag = closeConnection(); //断开连接
-                    if (!flag) {
-                        throw new Exception("断开连接发生异常！");
-                    }
-                    JOptionPane.showMessageDialog(frame, "成功断开！");
-                }catch (Exception exc) {
-                    JOptionPane.showMessageDialog(frame, exc.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
-                }
-                btn_start.setEnabled(true);
-                btn_stop.setEnabled(false);
+                JOptionPane.showMessageDialog(frame, "成功断开！");
+            }catch (Exception exc) {
+                JOptionPane.showMessageDialog(frame, exc.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+            }
+            btn_start.setEnabled(true);
+            btn_stop.setEnabled(false);
         });
 
         //关闭窗口时事件

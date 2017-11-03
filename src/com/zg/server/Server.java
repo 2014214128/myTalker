@@ -1,4 +1,4 @@
-﻿package com.zg.server;
+package com.zg.server;
 
 
 import com.zg.bean.User;
@@ -52,67 +52,67 @@ public class Server {
         });
         //文本框按回车键时事件
         txt_message.addActionListener((ActionEvent e) ->  {
-                send(); //执行消息发送
+            send(); //执行消息发送
         });
         //单击发送按钮时事件
         btn_send.addActionListener((ActionEvent e) -> {
-                send(); //执行消息发送
+            send(); //执行消息发送
         });
         //单击启动服务器按钮时事件
         btn_start.addActionListener((ActionEvent e) -> {
-                if (isStart) {
-                    JOptionPane.showMessageDialog(frame, "服务器已处于启动状态，不要重复启动！", "错误", JOptionPane.ERROR_MESSAGE);
-                    return ;
-                }
-                int max;
-                int port;
+            if (isStart) {
+                JOptionPane.showMessageDialog(frame, "服务器已处于启动状态，不要重复启动！", "错误", JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+            int max;
+            int port;
+            try {
                 try {
-                    try {
-                        max = Integer.parseInt(txt_max.getText());
-                    } catch (Exception e1) {
-                        throw new Exception("人数上限为正整数！");
-                    }
-                    if (max <= 0) {
-                        throw new Exception("人数上限为正整数！");
-                    }
-                    try {
-                        port  = Integer.parseInt(txt_port.getText());
-                    } catch (Exception e2) {
-                        throw new Exception("端口号为正整数！");
-                    }
-                    if (port <= 0) {
-                        throw new Exception("端口号为正整数！");
-                    }
-                    serverStart(max, port);
-                    contentArea.append("服务器已成功启动!人数上限：" + max + ",端口：" + port
-                            + "\r\n");
-                    JOptionPane.showMessageDialog(frame, "服务器成功启动!");
-                    btn_start.setEnabled(false);
-                    txt_max.setEnabled(false);
-                    txt_port.setEnabled(false);
-                    btn_stop.setEnabled(true);
-
-                } catch (Exception exc) {
-                    JOptionPane.showMessageDialog(frame, exc.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+                    max = Integer.parseInt(txt_max.getText());
+                } catch (Exception e1) {
+                    throw new Exception("人数上限为正整数！");
                 }
+                if (max <= 0) {
+                    throw new Exception("人数上限为正整数！");
+                }
+                try {
+                    port  = Integer.parseInt(txt_port.getText());
+                } catch (Exception e2) {
+                    throw new Exception("端口号为正整数！");
+                }
+                if (port <= 0) {
+                    throw new Exception("端口号为正整数！");
+                }
+                serverStart(max, port);
+                contentArea.append("服务器已成功启动!人数上限：" + max + ",端口：" + port
+                        + "\r\n");
+                JOptionPane.showMessageDialog(frame, "服务器成功启动!");
+                btn_start.setEnabled(false);
+                txt_max.setEnabled(false);
+                txt_port.setEnabled(false);
+                btn_stop.setEnabled(true);
+
+            } catch (Exception exc) {
+                JOptionPane.showMessageDialog(frame, exc.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+            }
         });
         //单击停止服务器按钮时事件
         btn_stop.addActionListener((ActionEvent e) -> {
-                if (!isStart) {
-                    JOptionPane.showMessageDialog(frame, "服务器还未启动，无需停止！", "错误", JOptionPane.ERROR_MESSAGE);
-                    return ;
-                }
-                try {
-                    closeServer();
-                    btn_start.setEnabled(true);
-                    txt_max.setEnabled(true);
-                    txt_port.setEnabled(true);
-                    btn_stop.setEnabled(false);
-                    contentArea.append("服务器成功停止！\r\n");
-                    JOptionPane.showMessageDialog(frame, "服务器成功停止！");
-                } catch (Exception exc) {
-                    JOptionPane.showMessageDialog(frame, "停止服务器发生异常！", "错误", JOptionPane.ERROR_MESSAGE);
-                }
+            if (!isStart) {
+                JOptionPane.showMessageDialog(frame, "服务器还未启动，无需停止！", "错误", JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+            try {
+                closeServer();
+                btn_start.setEnabled(true);
+                txt_max.setEnabled(true);
+                txt_port.setEnabled(true);
+                btn_stop.setEnabled(false);
+                contentArea.append("服务器成功停止！\r\n");
+                JOptionPane.showMessageDialog(frame, "服务器成功停止！");
+            } catch (Exception exc) {
+                JOptionPane.showMessageDialog(frame, "停止服务器发生异常！", "错误", JOptionPane.ERROR_MESSAGE);
+            }
         });
     }
     //启动服务器
