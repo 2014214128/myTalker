@@ -1,4 +1,4 @@
-package com.zg.client;
+﻿package com.zg.client;
 
 import com.zg.bean.User;
 
@@ -226,7 +226,7 @@ public class Client {
 
         frame = new JFrame("客户机");
         //更改JFrame图标
-        frame.setIconImage(Toolkit.getDefaultToolkit().createImage(Client.class.getResource("/qq.png")));
+        frame.setIconImage(Toolkit.getDefaultToolkit().createImage(Client.class.getResource("/qq.jpg")));
         frame.setLayout(new BorderLayout());
         frame.add(northPanel, "North");
         frame.add(centerSplit, "Center");

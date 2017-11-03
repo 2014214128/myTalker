@@ -1,4 +1,4 @@
-package com.zg.server;
+﻿package com.zg.server;
 
 
 import com.zg.bean.User;
@@ -172,7 +172,7 @@ public class Server {
         JList userList;
         frame = new JFrame("服务器");
         //更改JFrame的图标
-        frame.setIconImage(Toolkit.getDefaultToolkit().createImage(Server.class.getResource("/qq.png")));
+        frame.setIconImage(Toolkit.getDefaultToolkit().createImage(Server.class.getResource("/qq.jpg")));
         contentArea = new JTextArea();
         contentArea.setEditable(false);
         contentArea.setForeground(Color.BLUE);
